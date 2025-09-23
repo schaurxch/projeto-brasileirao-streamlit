@@ -1,12 +1,16 @@
 import streamlit as st
-from utils.db_utils import get_lista_times, get_ultimos_resultados, get_escudo_path, get_team_id
-from pathlib import Path
-
-ESCUDOS_PATH = Path("escudos")
+from utils.db_utils import get_lista_times, get_escudo_path, get_team_id
 
 def mostrar_home():
-    st.title("Brasileirão 2025")
+    st.title("Brasileirão 2025 :soccer:")
     times = get_lista_times()
+    st.markdown(
+    f'Obrigado [adaoduque](https://github.com/adaoduque) por disponibilizar os dados no '
+    f'[Kaggle](https://www.kaggle.com/datasets/adaoduque/campeonato-brasileiro-de-futebol/data) '
+    f'e no [GitHub](https://github.com/adaoduque/Brasileirao_Dataset). '
+    f'Um agradecimento especial ao [Scoreaxis](https://www.scoreaxis.com/) por fornecer os dados e widgets incorporáveis.'
+    )
+  
     st.subheader("Selecione um time:")
 
     cols = st.columns(5)
@@ -21,27 +25,7 @@ def mostrar_home():
         st.markdown(f"## {selected_time}")
         team_id = get_team_id(selected_time)
 
-        db_file = "data/brasileiro_2024.db"
-        ultimos_resultados = get_ultimos_resultados(selected_time, db_file)
 
-        # -----------------------------
-        # 1️⃣ Últimos 5 resultados
-        # -----------------------------
-        #st.subheader("Últimos 5 Resultados (2024)")
-        #for _, row in ultimos_resultados.iterrows():
-            #if row['vencedor'] == selected_time:
-                #emoji = "✅"
-            #elif row['vencedor'] == "Empate":
-                #emoji = "⚪"
-            #else:
-                #emoji = "❌"
-
-            #partida_str = f"{row['mandante']} ({row['gols_mandante']}) x ({row['gols_visitante']}) {row['visitante']} - {row['data_partida']} {emoji}"
-            #st.markdown(f"- {partida_str}")
-
-        # -----------------------------
-        # 2️⃣ Widgets dinâmicos (Scoreaxis) - altura fixa 350px
-        # -----------------------------
         if team_id:
             # Elenco
             st.subheader("Informações do Time (Elenco)")
@@ -70,9 +54,7 @@ def mostrar_home():
             <div style="font-size: 12px; font-family: Arial, sans-serif; text-align: left;">Team data by <a target="_blank" href="https://www.scoreaxis.com/">Scoreaxis</a></div>
             """, unsafe_allow_html=True)
 
-        # -----------------------------
-        # 3️⃣ Tabela atual do campeonato (fixa, altura 550px)
-        # -----------------------------
+        # Tabela Atual
         st.subheader("Tabela Atual")
         st.markdown("""
         <div style="border-width:1px;border-color:rgba(0, 0, 0, 0.15);border-style:solid;border-radius:8px;padding:10px;background:#fff;width:100%">
