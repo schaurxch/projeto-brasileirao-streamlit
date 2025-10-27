@@ -8,6 +8,7 @@ st.title("Dados da Tabela Cartões :file_folder:")
 
 tabela_cartoes = pd.read_csv("data/campeonato-brasileiro-cartoes.csv")
 tabela_cartoes = tabela_cartoes.rename(columns={'rodata': 'rodada'})
+tabela_cartoes = tabela_cartoes.fillna(" ")
 
 # ---------- BOTÃO RESET ----------
 if st.sidebar.button("🔄 Resetar Filtros"):

@@ -10,6 +10,7 @@ st.title("Dados da Tabela Full :file_folder:")
 tabela_full = pd.read_csv("data/campeonato-brasileiro-full.csv")
 tabela_full['data'] = pd.to_datetime(tabela_full['data'], format='%d/%m/%Y')
 tabela_full = tabela_full.rename(columns={'rodata': 'rodada'})
+tabela_full = tabela_full.fillna(" ")
 
 # ---------- BOTÃO RESET ----------
 if st.sidebar.button("🔄 Resetar Filtros"):

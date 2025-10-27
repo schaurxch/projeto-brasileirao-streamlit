@@ -9,6 +9,7 @@ st.title("Dados da Tabela Gols :file_folder:")
 
 tabela_gols = pd.read_csv("data/campeonato-brasileiro-gols.csv")
 tabela_gols = tabela_gols.rename(columns={'rodata': 'rodada'})
+tabela_gols = tabela_gols.fillna(" ")
 
 # ---------- BOTÃO RESET ----------
 if st.sidebar.button("🔄 Resetar Filtros"):
