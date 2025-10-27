@@ -49,6 +49,10 @@ elif st.session_state["tabela_escolhida"] == "Tabela de Estatísticas":
 else:
     tabela = pd.DataFrame()  # fallback seguro
 
+# preencher valores vazios com " "
+tabela.fillna(" ", inplace=True)
+
+
 # Helper para transformar nomes de coluna em chaves seguras para session_state
 def safe_key(col_name: str) -> str:
     return re.sub(r"\W+", "_", str(col_name)).strip("_")
